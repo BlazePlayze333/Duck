@@ -3,81 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Duck Find QR</title>
+  <title>Duck Found!</title>
   <style>
-    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --accent:#22c55e; }
-    * { box-sizing:border-box; }
+    :root {
+      --bg: #0f172a;
+      --accent: #22c55e;
+      --accent2: #38bdf8;
+      --text: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
     body {
-      margin:0; min-height:100vh; display:grid; place-items:center;
-      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#1e3a8a,#0f172a);
-      color:var(--text);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e3a8a, #020617);
+      color: var(--text);
     }
-    .card {
-      width:min(900px,92vw); background:rgba(17,24,39,.9);
-      border:1px solid rgba(255,255,255,.12); border-radius:24px;
-      padding:24px; box-shadow:0 20px 60px rgba(0,0,0,.35);
+    main {
+      max-width: 640px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.94);
+      border-radius: 24px;
+      padding: 24px 20px 26px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      text-align: center;
     }
-    h1 { margin:0 0 8px; font-size:clamp(28px,4vw,52px); }
-    p { margin:0 0 18px; opacity:.9; }
-    .grid { display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center; }
-    .panel { background:#0b1220; border-radius:20px; padding:18px; }
-    .duck-wrap { position:relative; width:min(100%,520px); margin:auto; }
-    svg { width:100%; height:auto; display:block; }
-    .qr {
-      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-      width:22%; min-width:92px; max-width:150px; background:white; padding:10px;
-      border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 5vw, 40px);
     }
-    .note { margin-top:14px; font-size:14px; opacity:.85; }
+    h1 span {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+    .duck-emoji {
+      font-size: 48px;
+      margin-bottom: 6px;
+    }
+    .tagline {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.75;
+      margin-bottom: 12px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.18);
+      color: #a5f3fc;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .btn-row {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
     a.btn {
-      display:inline-block; margin-top:14px; padding:12px 16px; border-radius:999px;
-      background:var(--accent); color:#052e16; text-decoration:none; font-weight:700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
     }
-    @media (max-width: 760px){ .grid{ grid-template-columns:1fr; } }
+    a.btn.primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #020617;
+      border-color: transparent;
+    }
+    small {
+      display: block;
+      margin-top: 16px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Duck Find</h1>
-    <p>Scan the QR code on the duck cruise page to open the hidden duck finder.</p>
-    <div class="grid">
-      <div class="panel">
-        <div class="duck-wrap">
-          <svg viewBox="0 0 800 600" aria-label="cartoon duck">
-            <defs>
-              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#fde047"/>
-                <stop offset="100%" stop-color="#f59e0b"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="390" cy="340" rx="240" ry="170" fill="url(#g)"/>
-            <circle cx="545" cy="170" r="110" fill="url(#g)"/>
-            <ellipse cx="500" cy="335" rx="80" ry="60" fill="#fffbeb" opacity=".9"/>
-            <ellipse cx="520" cy="150" rx="16" ry="22" fill="#111827"/>
-            <path d="M615 205 C690 210, 705 280, 625 285 C585 287, 565 270, 560 250 Z" fill="#fb923c"/>
-            <path d="M245 300 C180 220, 150 140, 165 85 C245 140, 300 170, 335 220 Z" fill="#facc15"/>
-            <rect x="250" y="495" width="95" height="70" rx="28" fill="#fb923c"/>
-            <rect x="390" y="495" width="95" height="70" rx="28" fill="#fb923c"/>
-          </svg>
-
-          <img
-            class="qr"
-            alt="QR code"
-            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fyour-username.github.io%2Fduck-find"
-          />
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2 style="margin-top:0">Link target</h2>
-        <p id="target">https://your-username.github.io/duck-find</p>
-        <a class="btn" href="https://your-username.github.io/duck-find">Open Duck Find</a>
-        <div class="note">
-          Replace <strong>your-username</strong> with your GitHub name and change the link if you want a different hidden page.
-        </div>
-      </div>
+  <main>
+    <div class="badge">
+      <span>🗺️</span>
+      <span>Cruise Duck Quest</span>
     </div>
+
+    <div class="duck-emoji">🦆</div>
+
+    <div class="tagline">oh what luck...</div>
+    <h1><span>you found the duck!</span></h1>
+
+    <p>
+      Someone hid this little duck on the ship as part of a just-for-fun duck hunt.
+      No prize, just bragging rights and good vibes.
+    </p>
+
+    <p>
+      Feel free to move the duck and hide it for the next person, or leave it where you found it.
+      Either way, thanks for playing!
+    </p>
+
+    <div class="btn-row">
+      <!-- Optional: point this back to a main duck info page or your profile -->
+      <a class="btn primary" href="#" onclick="alert('You can edit this link to go anywhere—another page, a form, etc.'); return false;">
+        See more ducks
+      </a>
+      <a class="btn" href="#" onclick="alert('You can change this to your Instagram, GitHub, or a feedback form.'); return false;">
+        Share your find
+      </a>
+    </div>
+
+    <small>
+      P.S. Please leave the duck on the ship so more people can enjoy finding it.
+    </small>
   </main>
 </body>
 </html>
