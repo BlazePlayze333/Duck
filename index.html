@@ -22,16 +22,21 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #1e3a8a, #020617);
       color: var(--text);
+      overflow: hidden;
+      position: relative;
+      cursor: none; /* optional: hide cursor so ducks feel like cursor */
     }
     main {
       max-width: 640px;
       width: 100%;
       background: rgba(15, 23, 42, 0.94);
       border-radius: 24px;
-      padding: 24px 20px 26px;
+      padding: 24px 20px 30px;
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
     h1 {
       margin: 0 0 4px;
@@ -45,7 +50,7 @@
       color: transparent;
     }
     p {
-      margin: 0;
+      margin: 0 0 18px;
       line-height: 1.6;
       opacity: 0.95;
       font-size: 18px;
@@ -62,6 +67,33 @@
       opacity: 0.75;
       margin-bottom: 10px;
     }
+    .quack-btn {
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #020617;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* floating ducks that follow the mouse */
+    .duck-follow {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      font-size: 32px;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
@@ -72,11 +104,59 @@
     <h1><span>you found a duck!</span></h1>
 
     <p>
-oh what luck...
 you found a duck!
 keep or hide, you decide.
 Congrats!
     </p>
+
+    <button class="quack-btn" id="quackButton">
+      🦆 Play duck noise
+    </button>
   </main>
+
+  <!-- floating ducks -->
+  <div class="duck-follow">🦆</div>
+  <div class="duck-follow">🦆</div>
+  <div class="duck-follow">🦆</div>
+
+  <audio id="duckSound" src="duck.mp3"></audio>
+  <!-- You can change to duck.wav; just update src -->
+
+  <script>
+    // Ducks follow the mouse with a slight offset for a little trail effect
+    const ducks = document.querySelectorAll('.duck-follow');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateDucks() {
+      const delay = 18; // how far each duck lags behind the mouse
+      ducks.forEach((duck, index) => {
+        const dx = mouseX + index * 14;
+        const dy = mouseY + index * 8;
+        duck.style.left = dx + 'px';
+        duck.style.top = dy + 'px';
+      });
+      requestAnimationFrame(animateDucks);
+    }
+    animateDucks();
+
+    // Duck noise button
+    const quackButton = document.getElementById('quackButton');
+    const duckSound = document.getElementById('duckSound');
+
+    quackButton.addEventListener('click', () => {
+      // rewind to start so it plays each click
+      duckSound.currentTime = 0;
+      duckSound.play().catch(() => {
+        // if autoplay blocked, user interaction already happened via click
+        // so usually it should play; this catch is just a safety.
+      });
+    });
+  </script>
 </body>
 </html>
