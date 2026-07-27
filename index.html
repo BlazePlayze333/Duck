@@ -138,9 +138,16 @@
       opacity: 0.75;
       text-align: left;
     }
+
+    /* optional message about how many times noise played */
+    #duckCountMessage {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
   </style>
 
-  <!-- Google Analytics GA4: replace G-XXXXXXXXXX with your Measurement ID -->
+  <!-- Google Analytics GA4: replace G-XXXXXXXXXX with your Measurement ID later -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -166,6 +173,8 @@ This duck came from Dallas, Texas.
       🦆 Play duck noise
     </button>
 
+    <p id="duckCountMessage"></p>
+
     <!-- Duck find form (Formspree) -->
     <form
       action="https://formspree.io/f/mojgyrkp"
@@ -175,9 +184,20 @@ This duck came from Dallas, Texas.
         <label for="name">Name</label>
         <input id="name" name="name" type="text" placeholder="Your name" required />
       </div>
+
       <div class="form-row">
         <label for="from">Where are you from?</label>
         <input id="from" name="from" type="text" placeholder="City, Country" required />
+      </div>
+
+      <div class="form-row">
+        <label for="foundDate">When did you find this duck?</label>
+        <input id="foundDate" name="found_date" type="date" required />
+      </div>
+
+      <div class="form-row">
+        <label for="cruise">What cruise / ship were you on?</label>
+        <input id="cruise" name="cruise_name" type="text" placeholder="Ship or cruise name" required />
       </div>
 
       <!-- Extra metadata so you know which duck / page -->
@@ -230,15 +250,22 @@ This duck came from Dallas, Texas.
     }
     animateDucks();
 
-    // ===== PLAY AUDIO ON BUTTON CLICK =====
+    // ===== PLAY AUDIO ON BUTTON CLICK + COUNT MESSAGE =====
     const quackButton = document.getElementById('quackButton');
     const duckSound = document.getElementById('duckSound');
+    const duckCountMessage = document.getElementById('duckCountMessage');
+
+    let duckCount = 0;
 
     quackButton.addEventListener('click', () => {
       duckSound.currentTime = 0;
       duckSound.play().catch((err) => {
         console.warn("Unable to play duck sound:", err);
       });
+
+      duckCount++;
+      duckCountMessage.textContent =
+        `Duck noise played ${duckCount} time${duckCount === 1 ? '' : 's'} this visit.`;
     });
   </script>
 </body>
