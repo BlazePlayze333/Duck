@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Duck Found!</title>
+
   <style>
     :root {
       --bg: #0f172a;
@@ -83,6 +84,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
+    /* ducks that follow the mouse */
     .duck-follow {
       position: fixed;
       width: 32px;
@@ -92,7 +94,60 @@
       transform: translate(-50%, -50%);
       z-index: 1;
     }
+
+    /* form styles */
+    form {
+      margin-top: 24px;
+      text-align: left;
+    }
+    .form-row {
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      opacity: 0.9;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      color: var(--text);
+      font-size: 14px;
+    }
+    input::placeholder {
+      color: rgba(148,163,184,0.9);
+    }
+    .submit-btn {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: rgba(56,189,248,0.9);
+      color: #020617;
+    }
+    .form-note {
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: 0.75;
+      text-align: left;
+    }
   </style>
+
+  <!-- Google Analytics GA4: replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
   <main>
@@ -110,6 +165,29 @@ This duck came from Dallas, Texas.
     <button class="quack-btn" id="quackButton">
       🦆 Play duck noise
     </button>
+
+    <!-- Duck find form (Formspree) -->
+    <form
+      action="https://formspree.io/f/mojgyrkp"
+      method="POST"
+    >
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required />
+      </div>
+      <div class="form-row">
+        <label for="from">Where are you from?</label>
+        <input id="from" name="from" type="text" placeholder="City, Country" required />
+      </div>
+
+      <!-- Extra metadata so you know which duck / page -->
+      <input type="hidden" name="duck-page" value="Dallas cruise ducks" />
+
+      <button class="submit-btn" type="submit">Submit duck find</button>
+      <div class="form-note">
+        When you submit, your answer is sent to the duck creator.
+      </div>
+    </form>
   </main>
 
   <!-- ducks that follow the mouse -->
@@ -117,12 +195,9 @@ This duck came from Dallas, Texas.
   <div class="duck-follow" id="duck1">🦆</div>
   <div class="duck-follow" id="duck2">🦆</div>
 
-  <!-- SIMPLE AUDIO ELEMENT USING A REAL FILE -->
+  <!-- audio file living next to index.html -->
   <audio id="duckSound">
     <source src="duck.mp3" type="audio/mpeg">
-    <!-- fallback type if you use WAV instead:
-    <source src="duck.wav" type="audio/wav">
-    -->
   </audio>
 
   <script>
@@ -151,7 +226,6 @@ This duck came from Dallas, Texas.
         duck.el.style.left = duck.x + 'px';
         duck.el.style.top = duck.y + 'px';
       });
-
       requestAnimationFrame(animateDucks);
     }
     animateDucks();
