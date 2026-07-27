@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Duck Find QR</title>
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --accent:#22c55e; }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#1e3a8a,#0f172a);
+      color:var(--text);
+    }
+    .card {
+      width:min(900px,92vw); background:rgba(17,24,39,.9);
+      border:1px solid rgba(255,255,255,.12); border-radius:24px;
+      padding:24px; box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    h1 { margin:0 0 8px; font-size:clamp(28px,4vw,52px); }
+    p { margin:0 0 18px; opacity:.9; }
+    .grid { display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center; }
+    .panel { background:#0b1220; border-radius:20px; padding:18px; }
+    .duck-wrap { position:relative; width:min(100%,520px); margin:auto; }
+    svg { width:100%; height:auto; display:block; }
+    .qr {
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:22%; min-width:92px; max-width:150px; background:white; padding:10px;
+      border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .note { margin-top:14px; font-size:14px; opacity:.85; }
+    a.btn {
+      display:inline-block; margin-top:14px; padding:12px 16px; border-radius:999px;
+      background:var(--accent); color:#052e16; text-decoration:none; font-weight:700;
+    }
+    @media (max-width: 760px){ .grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Duck Find</h1>
+    <p>Scan the QR code on the duck cruise page to open the hidden duck finder.</p>
+    <div class="grid">
+      <div class="panel">
+        <div class="duck-wrap">
+          <svg viewBox="0 0 800 600" aria-label="cartoon duck">
+            <defs>
+              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#fde047"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="390" cy="340" rx="240" ry="170" fill="url(#g)"/>
+            <circle cx="545" cy="170" r="110" fill="url(#g)"/>
+            <ellipse cx="500" cy="335" rx="80" ry="60" fill="#fffbeb" opacity=".9"/>
+            <ellipse cx="520" cy="150" rx="16" ry="22" fill="#111827"/>
+            <path d="M615 205 C690 210, 705 280, 625 285 C585 287, 565 270, 560 250 Z" fill="#fb923c"/>
+            <path d="M245 300 C180 220, 150 140, 165 85 C245 140, 300 170, 335 220 Z" fill="#facc15"/>
+            <rect x="250" y="495" width="95" height="70" rx="28" fill="#fb923c"/>
+            <rect x="390" y="495" width="95" height="70" rx="28" fill="#fb923c"/>
+          </svg>
+
+          <img
+            class="qr"
+            alt="QR code"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fyour-username.github.io%2Fduck-find"
+          />
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 style="margin-top:0">Link target</h2>
+        <p id="target">https://your-username.github.io/duck-find</p>
+        <a class="btn" href="https://your-username.github.io/duck-find">Open Duck Find</a>
+        <div class="note">
+          Replace <strong>your-username</strong> with your GitHub name and change the link if you want a different hidden page.
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
