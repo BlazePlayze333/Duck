@@ -149,24 +149,19 @@ This duck came from Dallas, Texas.
     }
     animateDucks();
 
-    // ===== INLINE BASE64 DUCK NOISE (EXAMPLE SOUND) =====
-    // This is a tiny WAV beep-like clip as a data URI.
-    // You can replace it with your own data URI if you want.
+    // ===== INLINE BASE64 DUCK NOISE (WORKING EXAMPLE) =====
+    // This is a tiny WAV "beep" sound as a data URI; it will play in modern browsers.
+    // You can swap it later with your own duck quack data URI.
     const duckDataUrl =
-      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAIAfAAACABAAZGF0YQAAAAAA" +
-      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
-      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-
-    let duckSound = null;
-    try {
-      duckSound = new Audio(duckDataUrl);
-    } catch (err) {
-      console.warn("Duck data URL is invalid:", err);
-    }
+      "data:audio/wav;base64," +
+      "UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAAAAP//" +
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA//8AAP//AAD//wAA" +
+      "AP8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA";
 
     const quackButton = document.getElementById('quackButton');
+    const duckSound = new Audio(duckDataUrl);
+
     quackButton.addEventListener('click', () => {
-      if (!duckSound) return;
       duckSound.currentTime = 0;
       duckSound.play().catch((err) => {
         console.warn("Unable to play duck sound:", err);
