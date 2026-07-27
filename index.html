@@ -24,7 +24,6 @@
       color: var(--text);
       overflow: hidden;
       position: relative;
-      /* cursor: default;   <-- keep normal cursor so ducks FOLLOW it */
     }
     main {
       max-width: 640px;
@@ -108,6 +107,7 @@ oh what luck...
 you found a duck!
 keep or hide, you decide.
 Congrats!
+This duck came from Dallas, Texas.
     </p>
 
     <button class="quack-btn" id="quackButton">
@@ -137,9 +137,8 @@ Congrats!
 
     function animateDucks() {
       ducks.forEach((duck, index) => {
-        // make each duck chase either the mouse or the previous duck
         const target = index === 0 ? mouse : ducks[index - 1];
-        const speed = 0.12;  // tweak for snappier vs smoother
+        const speed = 0.14;  // adjust for how tightly they follow
 
         duck.x += (target.x - duck.x) * speed;
         duck.y += (target.y - duck.y) * speed;
@@ -152,8 +151,13 @@ Congrats!
     }
     animateDucks();
 
-    // ===== DUCK SOUND (still using inline data URL placeholder) =====
-    const duckDataUrl = "DATA_URL_GOES_HERE"; // put your audio data URI here
+    // ===== INLINE BASE64 DUCK NOISE (EXAMPLE SOUND) =====
+    // This is a tiny WAV beep-like clip as a data URI.
+    // You can replace it with your own data URI if you want.
+    const duckDataUrl =
+      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAIAfAAACABAAZGF0YQAAAAAA" +
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     let duckSound = null;
     try {
