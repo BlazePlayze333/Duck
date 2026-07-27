@@ -83,7 +83,6 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
-    /* ducks that follow the mouse (smooth trailing) */
     .duck-follow {
       position: fixed;
       width: 32px;
@@ -118,6 +117,14 @@ This duck came from Dallas, Texas.
   <div class="duck-follow" id="duck1">🦆</div>
   <div class="duck-follow" id="duck2">🦆</div>
 
+  <!-- SIMPLE AUDIO ELEMENT USING A REAL FILE -->
+  <audio id="duckSound">
+    <source src="duck.mp3" type="audio/mpeg">
+    <!-- fallback type if you use WAV instead:
+    <source src="duck.wav" type="audio/wav">
+    -->
+  </audio>
+
   <script>
     // ===== DUCKS FOLLOW THE MOUSE WITH SMOOTH LERP =====
     const ducks = [
@@ -136,7 +143,7 @@ This duck came from Dallas, Texas.
     function animateDucks() {
       ducks.forEach((duck, index) => {
         const target = index === 0 ? mouse : ducks[index - 1];
-        const speed = 0.14;  // adjust for how tightly they follow
+        const speed = 0.14;
 
         duck.x += (target.x - duck.x) * speed;
         duck.y += (target.y - duck.y) * speed;
@@ -149,17 +156,9 @@ This duck came from Dallas, Texas.
     }
     animateDucks();
 
-    // ===== INLINE BASE64 DUCK NOISE (WORKING EXAMPLE) =====
-    // This is a tiny WAV "beep" sound as a data URI; it will play in modern browsers.
-    // You can swap it later with your own duck quack data URI.
-    const duckDataUrl =
-      "data:audio/wav;base64," +
-      "UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAAAAP//" +
-      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA//8AAP//AAD//wAA" +
-      "AP8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA";
-
+    // ===== PLAY AUDIO ON BUTTON CLICK =====
     const quackButton = document.getElementById('quackButton');
-    const duckSound = new Audio(duckDataUrl);
+    const duckSound = document.getElementById('duckSound');
 
     quackButton.addEventListener('click', () => {
       duckSound.currentTime = 0;
