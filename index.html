@@ -34,8 +34,9 @@
       text-align: center;
     }
     h1 {
-      margin: 0 0 8px;
+      margin: 0 0 4px;
       font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.2;
     }
     h1 span {
       display: inline-block;
@@ -44,9 +45,11 @@
       color: transparent;
     }
     p {
-      margin: 0 0 16px;
+      margin: 0;
       line-height: 1.6;
       opacity: 0.95;
+      font-size: 18px;
+      white-space: pre-line;
     }
     .duck-emoji {
       font-size: 48px;
@@ -57,87 +60,23 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       opacity: 0.75;
-      margin-bottom: 12px;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.18);
-      color: #a5f3fc;
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-    .btn-row {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-    a.btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 18px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text);
-    }
-    a.btn.primary {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      color: #020617;
-      border-color: transparent;
-    }
-    small {
-      display: block;
-      margin-top: 16px;
-      font-size: 12px;
-      opacity: 0.7;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
   <main>
-    <div class="badge">
-      <span>🗺️</span>
-      <span>Cruise Duck Quest</span>
-    </div>
-
     <div class="duck-emoji">🦆</div>
 
     <div class="tagline">oh what luck...</div>
-    <h1><span>you found the duck!</span></h1>
+    <h1><span>you found a duck!</span></h1>
 
     <p>
-      Someone hid this little duck on the ship as part of a just-for-fun duck hunt.
-      No prize, just bragging rights and good vibes.
+oh what luck...
+you found a duck!
+keep or hide, you decide.
+Congrats!
     </p>
-
-    <p>
-      Feel free to move the duck and hide it for the next person, or leave it where you found it.
-      Either way, thanks for playing!
-    </p>
-
-    <div class="btn-row">
-      <!-- Optional: point this back to a main duck info page or your profile -->
-      <a class="btn primary" href="#" onclick="alert('You can edit this link to go anywhere—another page, a form, etc.'); return false;">
-        See more ducks
-      </a>
-      <a class="btn" href="#" onclick="alert('You can change this to your Instagram, GitHub, or a feedback form.'); return false;">
-        Share your find
-      </a>
-    </div>
-
-    <small>
-      P.S. Please leave the duck on the ship so more people can enjoy finding it.
-    </small>
   </main>
 </body>
 </html>
