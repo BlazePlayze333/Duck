@@ -251,7 +251,24 @@ keep or hide, you decide.
 Congrats!
 This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with Tina (Mom), Liam, Asher, and Gavin (from Dallas, Texas).
     </p>
+<script>
+  const quackButton = document.getElementById('quackButton');
+  const duckSound = document.getElementById('duckSound');
+  const duckCountMessage = document.getElementById('duckCountMessage');
 
+  let duckCount = 0;
+
+  quackButton.addEventListener('click', () => {
+    duckSound.currentTime = 0;
+    duckSound.play().catch(err => console.warn('Unable to play duck sound:', err));
+    duckCount++;
+    if (duckCountMessage) {
+      duckCountMessage.textContent =
+        `Duck noise played ${duckCount} time${duckCount === 1 ? '' : 's'} this visit.`;
+    }
+  });
+</script>
+    
     <div class="button-row">
       <button class="quack-btn" id="quackButton" type="button">🦆 Play duck noise</button>
       <button class="quack-btn" id="gameButton" type="button">🎮 Flappy Duck</button>
