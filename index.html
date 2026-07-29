@@ -146,81 +146,80 @@
     }
 
     .game-wrap {
-      margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(148,163,184,.22);
-    }
-    .game-top {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
-    }
-      /* Star Duck game styles */
-      .game-board {
-      position:relative;
-      width:100%;
-      max-width:680px;
-      height:360px;
-      margin:0 auto;
-      overflow:hidden;
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.35);
-      background: linear-gradient(to bottom, #9be7ff 0%, #64d8ff 55%, #4dd0e1 100%);
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,.08);
-      touch-action:none;
-    }
-      .star {
-      position:absolute;
-      width:42px;
-      height:42px;
-      font-size:42px;
-      line-height:1;
-      text-align:center;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
-      color: #ffd84d;
-    }
-      .duck-player {
-      position:absolute;
-      left:90px;
-      top:150px;
-      width:36px;
-      height:36px;
-      font-size:36px;
-      line-height:1;
-      transform:translate(-50%,-50%) rotate(0deg);
-      filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));
-    }
-     .game-overlay {
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(2,6,23,.25);
-      backdrop-filter:blur(1px);
-      color:white;
-     font-weight:700;
-      text-align:center;
-      padding:20px;
-    }
-      .game-card {
-      background:rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.32);
-      border-radius:18px;
-      padding:18px 16px;
-      max-width:320px;
-      box-shadow:0 18px 50px rgba(0,0,0,.25);
-    }
-      .tiny {
-      font-size:13px;
-      opacity:.92;
-      margin-top:8px;
-      line-height:1.4;
-      color:#f4fbff;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.24);
+}
+.game-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.game-board {
+  position:relative;
+  width:100%;
+  max-width:680px;
+  height:360px;
+  margin:0 auto;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.35);
+  background: linear-gradient(to bottom, #9be7ff 0%, #64d8ff 55%, #4dd0e1 100%);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.08);
+  touch-action:none;
+}
+.star {
+  position:absolute;
+  width:42px;
+  height:42px;
+  font-size:42px;
+  line-height:1;
+  text-align:center;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+  color: #ffd84d;
+}
+.duck-player {
+  position:absolute;
+  left:90px;
+  top:150px;
+  width:36px;
+  height:36px;
+  font-size:36px;
+  line-height:1;
+  transform:translate(-50%,-50%) rotate(0deg);
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));
+}
+.game-overlay {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(2,6,23,.25);
+  backdrop-filter:blur(1px);
+  color:white;
+  font-weight:700;
+  text-align:center;
+  padding:20px;
+}
+.game-card {
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:18px;
+  padding:18px 16px;
+  max-width:320px;
+  box-shadow:0 18px 50px rgba(0,0,0,.25);
+}
+.tiny {
+  font-size:13px;
+  opacity:.92;
+  margin-top:8px;
+  line-height:1.4;
+  color:#f4fbff;
 }
   </style>
 
@@ -261,10 +260,10 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
     <p id="duckCountMessage"></p>
 
   <div class="game-wrap" id="gameWrap" style="display:none;">
-<div class="game-top">
+  <div class="game-top">
     <div style="text-align:left;">
       <div style="font-weight:700;">Star Duck</div>
-      <div style="font-size:13px; opacity:.9;">Press Space / tap to flap. Collect the yellow stars.</div>
+      <div style="font-size:13px; opacity:.9;">Press Space / tap to flap. Collect every yellow star.</div>
     </div>
     <div style="display:flex; gap:10px; align-items:center;">
       <div><strong>Score:</strong> <span id="score">0</span></div>
@@ -278,7 +277,7 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
       <div class="game-card">
         <div style="font-size:22px; margin-bottom:6px;">Star Duck</div>
         <div>Press Start Game to begin.</div>
-        <div class="tiny">Tap the screen or press Space to flap. Collect stars to score points.</div>
+        <div class="tiny">Tap the screen or press Space to flap. You must collect every star or you die.</div>
         <div style="margin-top:12px;">
           <button class="quack-btn" id="startGameButton" type="button">Start Game</button>
         </div>
@@ -386,7 +385,7 @@ function resetGame() {
     <div class="game-card">
       <div style="font-size:22px; margin-bottom:6px;">Star Duck</div>
       <div>Press Start Game to begin.</div>
-      <div class="tiny">Tap the screen or press Space to flap. Collect stars to score points.</div>
+      <div class="tiny">Tap the screen or press Space to flap. Collect every star or you die.</div>
       <div style="margin-top:12px;">
         <button class="quack-btn" id="startGameButton" type="button">Start Game</button>
       </div>
@@ -411,7 +410,7 @@ function endGame() {
     <div class="game-card">
       <div style="font-size:22px; margin-bottom:6px;">Game Over</div>
       <div>Your score: <strong>${score}</strong></div>
-      <div class="tiny">Press Restart to try again.</div>
+      <div class="tiny">You missed a star or flew too high. Press Restart to try again.</div>
       <div style="margin-top:12px;">
         <button class="quack-btn" id="startGameButton2" type="button">Start Again</button>
       </div>
@@ -438,8 +437,8 @@ function loop() {
   duckY += vel;
 
   if (duckY < 0) {
-    duckY = 0;
-    vel = 0;
+    endGame();
+    return;
   }
 
   if (duckY > boardH) {
@@ -448,7 +447,7 @@ function loop() {
   }
 
   starTimer++;
-  if (starTimer > 95) {
+  if (starTimer > 120) {
     spawnStar();
     starTimer = 0;
   }
@@ -462,6 +461,11 @@ function loop() {
       if (score % 5 === 0) speed += 0.2;
     }
   });
+
+  if (stars.some(s => !s.hit && s.x < 90 - 30)) {
+    endGame();
+    return;
+  }
 
   stars = stars.filter(s => s.x > -80);
   updatePlayer();
