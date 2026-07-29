@@ -7,7 +7,6 @@
 
   <style>
     :root {
-      --bg: #0f172a;
       --accent: #22c55e;
       --accent2: #38bdf8;
       --text: #e5e7eb;
@@ -28,7 +27,7 @@
       position: relative;
     }
     main {
-      max-width: 640px;
+      max-width: 760px;
       width: 100%;
       background: rgba(15, 23, 42, 0.94);
       border-radius: 24px;
@@ -69,7 +68,6 @@
       margin-bottom: 10px;
     }
     .quack-btn {
-      margin-top: 4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -84,8 +82,12 @@
       color: #020617;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
-
-    /* ducks that follow the mouse */
+    .button-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     .duck-follow {
       position: fixed;
       width: 32px;
@@ -95,8 +97,6 @@
       transform: translate(-50%, -50%);
       z-index: 1;
     }
-
-    /* form styles */
     form {
       margin-top: 24px;
       text-align: left;
@@ -114,13 +114,13 @@
       width: 100%;
       padding: 8px 10px;
       border-radius: 10px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--text);
       font-size: 14px;
     }
     input::placeholder {
-      color: rgba(148,163,184,0.9);
+      color: rgba(148, 163, 184, 0.9);
     }
     .submit-btn {
       margin-top: 10px;
@@ -130,7 +130,7 @@
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      background: rgba(56,189,248,0.9);
+      background: rgba(56, 189, 248, 0.9);
       color: #020617;
     }
     .form-note {
@@ -139,16 +139,85 @@
       opacity: 0.75;
       text-align: left;
     }
-
-    /* optional message about how many times noise played */
     #duckCountMessage {
       margin-top: 12px;
       font-size: 14px;
       opacity: 0.8;
     }
+    .game-wrap {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.22);
+    }
+    .game-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .game-board {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      height: 360px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: linear-gradient(#7dd3fc, #0ea5e9 52%, #22c55e 52%, #15803d);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+      touch-action: none;
+    }
+    .pipe {
+      position: absolute;
+      width: 64px;
+      right: -90px;
+      background: linear-gradient(#16a34a, #15803d);
+      border: 3px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+    }
+    .pipe.top { top: 0; }
+    .pipe.bottom { bottom: 0; }
+    .duck-player {
+      position: absolute;
+      left: 90px;
+      top: 150px;
+      font-size: 36px;
+      line-height: 1;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+    }
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.4);
+      backdrop-filter: blur(1px);
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+    }
+    .game-card {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 18px;
+      padding: 18px 16px;
+      max-width: 320px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    }
+    .tiny {
+      font-size: 13px;
+      opacity: 0.82;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
   </style>
 
-  <!-- Google Analytics GA4: replace G-XXXXXXXXXX with your Measurement ID later -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6RHDQ2GW6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -156,13 +225,14 @@
     gtag('js', new Date());
     gtag('config', 'G-S6RHDQ2GW6');
   </script>
+
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xt36ehiena");
-</script>
+  </script>
 </head>
 <body>
   <main>
@@ -171,23 +241,49 @@
     <div class="tagline">oh what luck...</div>
     <h1><span>you found a duck!</span></h1>
 
-<p>
+    <p>
 keep or hide, you decide.
 Congrats!
 This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with Tina (Mom), Liam, Asher, and Gavin (from Dallas, Texas).
     </p>
 
-    <button class="quack-btn" id="quackButton">
-      🦆 Play duck noise
-    </button>
+    <div class="button-row">
+      <button class="quack-btn" id="quackButton">🦆 Play duck noise</button>
+      <button class="quack-btn" id="gameButton">🎮 Flappy Duck</button>
+    </div>
 
     <p id="duckCountMessage"></p>
 
-    <!-- Duck find form (Formspree) -->
-    <form
-      action="https://formspree.io/f/mojgyrkp"
-      method="POST"
-    >
+    <div class="game-wrap" id="gameWrap" style="display:none;">
+      <div class="game-top">
+        <div style="text-align:left;">
+          <div style="font-weight:700;">Flappy Duck</div>
+          <div style="font-size:13px; opacity:.8;">Press Space / tap to flap. Avoid the pipes.</div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div><strong>Score:</strong> <span id="score">0</span></div>
+          <button class="quack-btn" id="restartButton" type="button" style="padding:8px 14px;">Restart</button>
+        </div>
+      </div>
+
+      <div class="game-board" id="board">
+        <div class="duck-player" id="player">🦆</div>
+        <div class="game-overlay" id="overlay">
+          <div class="game-card">
+            <div style="font-size:22px; margin-bottom:6px;">Flappy Duck</div>
+            <div>Press Start Game to begin.</div>
+            <div class="tiny">Tap the screen or press Space to flap. Try to stay alive as long as you can.</div>
+            <div style="margin-top:12px;">
+              <button class="quack-btn" id="startGameButton" type="button">Start Game</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tiny" id="gameMsg" style="margin-top:10px; text-align:center;"></div>
+    </div>
+
+    <form action="https://formspree.io/f/mojgyrkp" method="POST">
       <div class="form-row">
         <label for="name">Name</label>
         <input id="name" name="name" type="text" placeholder="Your name" required />
@@ -208,34 +304,27 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
         <input id="cruise" name="cruise_name" type="text" placeholder="Ship or cruise name" required />
       </div>
 
-      <!-- Extra metadata so you know which duck / page -->
       <input type="hidden" name="duck-page" value="Dallas cruise ducks" />
 
       <button class="submit-btn" type="submit">Submit duck find</button>
-      <div class="form-note">
-        When you submit, your answer is sent to the duck creator.
-      </div>
+      <div class="form-note">When you submit, your answer is sent to the duck creator.</div>
     </form>
   </main>
 
-  <!-- ducks that follow the mouse -->
   <div class="duck-follow" id="duck0">🦆</div>
   <div class="duck-follow" id="duck1">🦆</div>
   <div class="duck-follow" id="duck2">🦆</div>
 
-  <!-- audio file living next to index.html -->
   <audio id="duckSound">
     <source src="duck.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // ===== DUCKS FOLLOW THE MOUSE WITH SMOOTH LERP =====
     const ducks = [
       { el: document.getElementById('duck0'), x: window.innerWidth / 2, y: window.innerHeight / 2 },
       { el: document.getElementById('duck1'), x: window.innerWidth / 2, y: window.innerHeight / 2 },
       { el: document.getElementById('duck2'), x: window.innerWidth / 2, y: window.innerHeight / 2 },
     ];
-
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     window.addEventListener('mousemove', (e) => {
@@ -246,11 +335,8 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
     function animateDucks() {
       ducks.forEach((duck, index) => {
         const target = index === 0 ? mouse : ducks[index - 1];
-        const speed = 0.14;
-
-        duck.x += (target.x - duck.x) * speed;
-        duck.y += (target.y - duck.y) * speed;
-
+        duck.x += (target.x - duck.x) * 0.14;
+        duck.y += (target.y - duck.y) * 0.14;
         duck.el.style.left = duck.x + 'px';
         duck.el.style.top = duck.y + 'px';
       });
@@ -258,23 +344,105 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
     }
     animateDucks();
 
-    // ===== PLAY AUDIO ON BUTTON CLICK + COUNT MESSAGE =====
     const quackButton = document.getElementById('quackButton');
     const duckSound = document.getElementById('duckSound');
     const duckCountMessage = document.getElementById('duckCountMessage');
-
     let duckCount = 0;
 
     quackButton.addEventListener('click', () => {
       duckSound.currentTime = 0;
-      duckSound.play().catch((err) => {
-        console.warn("Unable to play duck sound:", err);
-      });
-
+      duckSound.play().catch(err => console.warn('Unable to play duck sound:', err));
       duckCount++;
-      duckCountMessage.textContent =
-        `Duck noise played ${duckCount} time${duckCount === 1 ? '' : 's'} this visit.`;
+      duckCountMessage.textContent = `Duck noise played ${duckCount} time${duckCount === 1 ? '' : 's'} this visit.`;
     });
-  </script>
-</body>
-</html>
+
+    const gameButton = document.getElementById('gameButton');
+    const gameWrap = document.getElementById('gameWrap');
+    const board = document.getElementById('board');
+    const player = document.getElementById('player');
+    const overlay = document.getElementById('overlay');
+    const scoreEl = document.getElementById('score');
+    const gameMsg = document.getElementById('gameMsg');
+    const restartButton = document.getElementById('restartButton');
+
+    let running = false;
+    let score = 0;
+    let raf = 0;
+    let gravity = 0.42;
+    let jump = -7.2;
+    let duckY = 150;
+    let vel = 0;
+    let pipes = [];
+    let pipeTimer = 0;
+    let speed = 2.3;
+    let boardW = 0;
+    let boardH = 0;
+
+    function layout() {
+      boardW = board.clientWidth;
+      boardH = board.clientHeight;
+    }
+    window.addEventListener('resize', layout);
+
+    function updatePlayer() {
+      player.style.top = duckY + 'px';
+    }
+
+    function renderPipes() {
+      board.querySelectorAll('.pipe').forEach(p => p.remove());
+      pipes.forEach(p => {
+        const top = document.createElement('div');
+        top.className = 'pipe top';
+        top.style.left = p.x + 'px';
+        top.style.height = p.topH + 'px';
+
+        const bot = document.createElement('div');
+        bot.className = 'pipe bottom';
+        bot.style.left = p.x + 'px';
+        bot.style.height = p.bottomH + 'px';
+
+        board.appendChild(top);
+        board.appendChild(bot);
+      });
+    }
+
+    function spawnPipe() {
+      const gap = 140;
+      const topH = 40 + Math.random() * (boardH - gap - 120);
+      const bottomH = boardH - topH - gap;
+      pipes.push({ x: boardW + 20, topH, bottomH, passed: false });
+    }
+
+    function collides(p) {
+      const px = 90, py = duckY, pw = 36, ph = 36, pipeW = 64;
+      const inX = px + pw / 2 > p.x && px - pw / 2 < p.x + pipeW;
+      const hitTop = py - ph / 2 < p.topH;
+      const hitBottom = py + ph / 2 > p.topH + 140;
+      return inX && (hitTop || hitBottom);
+    }
+
+    function resetGame() {
+      running = false;
+      score = 0;
+      vel = 0;
+      duckY = boardH * 0.4;
+      pipes = [];
+      pipeTimer = 0;
+      speed = 2.3;
+      scoreEl.textContent = '0';
+      gameMsg.textContent = '';
+      overlay.style.display = 'flex';
+      overlay.innerHTML = `<div class="game-card"><div style="font-size:22px; margin-bottom:6px;">Flappy Duck</div><div>Press Start Game to begin.</div><div class="tiny">Tap the screen or press Space to flap. Try to stay alive as long as you can.</div><div style="margin-top:12px;"><button class="quack-btn" id="startGameButton" type="button">Start Game</button></div></div>`;
+      overlay.querySelector('#startGameButton').addEventListener('click', startGame);
+      updatePlayer();
+      renderPipes();
+    }
+
+    function startGame() {
+      overlay.style.display = 'none';
+      running = true;
+      gameMsg.textContent = 'Tap or press Space to flap.';
+      if (!raf) loop();
+    }
+
+    function endGame
