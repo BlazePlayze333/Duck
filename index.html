@@ -95,7 +95,9 @@
       pointer-events: none;
       font-size: 32px;
       transform: translate(-50%, -50%);
-      z-index: 1;
+      z-index:2147483647;
+      will-change:transform,left,top;
+      transition:transform .04s linear;
     }
     form {
       margin-top: 24px;
@@ -517,6 +519,26 @@ overlay.addEventListener('pointerdown', e => {
 
 window.addEventListener('resize', layout);
 setTimeout(() => { layout(); }, 0);
+</script>
+
+<script>
+const trailDucks=[...document.querySelectorAll('.duck-follow')];
+const pts=trailDucks.map(()=>({x:innerWidth/2,y:innerHeight/2}));
+window.addEventListener('pointermove',e=>{
+  pts[0].x=e.clientX; pts[0].y=e.clientY;
+});
+function animateTrail(){
+  for(let i=1;i<pts.length;i++){
+    pts[i].x+=(pts[i-1].x-pts[i].x)*0.18;
+    pts[i].y+=(pts[i-1].y-pts[i].y)*0.18;
+  }
+  trailDucks.forEach((d,i)=>{
+    d.style.left=pts[i].x+'px';
+    d.style.top=pts[i].y+'px';
+  });
+  requestAnimationFrame(animateTrail);
+}
+animateTrail();
 </script>
 </body>
 </html>  
