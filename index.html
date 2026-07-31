@@ -248,28 +248,10 @@
 
     <p>
 keep or hide, you decide.
-Congrats!
+Conquackulations!
 This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with Tina (Mom), Liam, Asher, and Gavin (from Dallas, Texas).
     </p>
-<script>
-  const quackButton = document.getElementById('quackButton');
-  const duckSound = document.getElementById('duckSound');
-  const duckCountMessage = document.getElementById('duckCountMessage');
-
-  let duckCount = 0;
-
-  quackButton.addEventListener('click', () => {
-    duckSound.currentTime = 0;
-    duckSound.play().catch(err => console.warn('Unable to play duck sound:', err));
-    duckCount++;
-    if (duckCountMessage) {
-      duckCountMessage.textContent =
-        `Duck noise played ${duckCount} time${duckCount === 1 ? '' : 's'} this visit.`;
-    }
-  });
-</script>
-    
-    <div class="button-row">
+<div class="button-row">
       <button class="quack-btn" id="quackButton" type="button">🦆 Play duck noise</button>
       <button class="quack-btn" id="gameButton" type="button">🎮 Flappy Duck</button>
     </div>
@@ -341,6 +323,21 @@ This duck originally sailed on the Carnival Liberty on August 2–9, 2026 with T
     <source src="duck.mp3" type="audio/mpeg">
   </audio>
   <script>
+window.addEventListener('DOMContentLoaded',()=>{
+ const quackButton=document.getElementById('quackButton');
+ const duckSound=document.getElementById('duckSound');
+ const duckCountMessage=document.getElementById('duckCountMessage');
+ let duckCount=0;
+ quackButton.addEventListener('click',()=>{
+  duckSound.currentTime=0;
+  duckSound.play().catch(console.warn);
+  duckCount++;
+  duckCountMessage.textContent=`Duck noise played ${duckCount} time${duckCount===1?'':'s'} this visit.`;
+ });
+});
+</script>
+
+<script>
 const gameButton = document.getElementById('gameButton');
 const gameWrap = document.getElementById('gameWrap');
 const board = document.getElementById('board');
@@ -361,6 +358,8 @@ function layout() {
 
 function updatePlayer() {
   player.style.top = duckY + 'px';
+  const angle=Math.max(-35,Math.min(55,vel*5));
+  player.style.transform=`translate(-50%,-50%) scaleX(-1) rotate(${angle}deg)`;
 }
 
 function renderStars() {
@@ -479,12 +478,14 @@ function loop() {
     }
   });
 
-  if (stars.some(s => !s.hit && s.x < 90 - 30)) {
+  // Remove collected and off-screen stars immediately
+  stars = stars.filter(s => !s.hit && s.x > -80);
+
+  if (stars.some(s => s.x < 90 - 30)) {
     endGame();
     return;
   }
 
-  stars = stars.filter(s => s.x > -80);
   updatePlayer();
   renderStars();
 }
